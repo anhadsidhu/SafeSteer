@@ -10,7 +10,7 @@ import tokenService from './tokenService';
 // }
 
 async function getAllStudents() {
-    const response = await fetch('http://localhost:3001/api/students', {
+    const response = await fetch('/api/students', {
         method: 'GET',
         headers: {
             'Content-type': 'application/json',
@@ -23,7 +23,7 @@ async function getAllStudents() {
 
 async function create(student) {
     try {
-        const response = await fetch('http://localhost:3001/api/students/create', {
+        const response = await fetch('/api/students/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ async function create(student) {
 
 async function show(id) {
     try {
-        const response = await fetch(`http://localhost:3001/api/students/${id}`, {
+        const response = await fetch(`/api/students/${id}`, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
@@ -63,7 +63,7 @@ async function show(id) {
 
 async function update(id, data) {
     try {
-        const response = await fetch(`http://localhost:3001/api/students/${id}`, {
+        const response = await fetch(`/api/students/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ async function update(id, data) {
 
 async function deleteStudent(id){
     try {
-        const response = await fetch(`http://localhost:3001/api/students/${id}` , {
+        const response = await fetch(`/api/students/${id}` , {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
