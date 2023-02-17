@@ -1,16 +1,17 @@
 import React from 'react'
 import './App.css';
 
-import StudentsList from './components/StudentsList';
-import SearchBar from './components/SearchBar';
+import StudentsList from './components/StudentsList/StudentsList';
+import SearchBar from './components/SearchBar/SearchBar';
 import MenuBar from './components/MenuBar/MenuBar'
 import LoginPage from './components/Pages/LoginPage/LoginPage';
 import SignupPage from './components/Pages/SignupPage/SignupPage'
 import userService from './utils/userService';
 import CreatePage from './components/Pages/CreatePage/CreateStudentPage';
-import DeletePage from './components/DeletePage/DeletePage';
+// import DeletePage from './components/DeletePage/DeletePage';
 import studentService from './utils/studentService';
 import DetailsPage from './components/DetailsPage/DetailsPage'
+import UpdatePage from './components/UpdatePage/UpdateStudentPage';
 
 import {
   createBrowserRouter,
@@ -36,6 +37,7 @@ class App extends React.Component {
     this.handleLogout = this.handleLogout.bind(this)
     this.setCurrentUser = this.setCurrentUser.bind(this)
     this.updateStudentListState = this.updateStudentListState.bind(this)
+    this.updateStudentStateAfterDelete = this.updateStudentStateAfterDelete.bind(this)
     this.getCurrentUser = this.getCurrentUser.bind(this)
   }
 
@@ -58,6 +60,14 @@ class App extends React.Component {
     this.setState(state => {
       return { students: [...state.students, data] }
     })
+
+  }
+
+  async updateStudentStateAfterDelete()  {
+    const data = await studentService.list()
+    console.log(data)
+    this.setState({ students: data })
+    return redirect ("/students")
 
   }
 
@@ -109,6 +119,7 @@ class App extends React.Component {
   }
 
   getStudentsOrlogin() {
+    console.log(this.state.students)
     return this.state.user ? (<div className="container">
       <StudentsList students={this.state.students} />
     </div>) : <Navigate to='/login' replace />
@@ -132,32 +143,36 @@ class App extends React.Component {
         loader: this.redirectIfUser
 
       },
-      /*{
-        path: '/puppies',
-        element: (<div className="container">
-                    <PuppiesList puppies={this.state.puppies} />
-                </div>),
-        loader: this.redirectToLogin
-      },*/
+
 
       {
         path: '/students',
-        element: this.getStudentsOrlogin()
+        element: (
+          <>
+            {/* <SearchBar /> */}
+            {this.getStudentsOrlogin()}
+          </>
+        )
       },
       {
         path: '/students/:id',
-        element: <DetailsPage />,
+        element: <DetailsPage updateStudentState={this.updateStudentListState}/>,
 
       },
       {
         path: '/create',
-        element: <CreatePage updateStudentState={this.updateStudentListState} getCurrentUser={this.getCurrentUser} />,
+        element: (
+          <>
+        <CreatePage updateStudentState={this.updateStudentListState} getCurrentUser={this.getCurrentUser} />
+
+        </>)
         // loader: this.redirectIfUser
         // loader: this.getStudentsOrlogin
       },
       {
-        path: '/delete',
-        element: <DeletePage />,
+        path: '/students/:id/update',
+        element: <UpdatePage />,
+
       },
       {
         path: '/logout',
@@ -184,7 +199,7 @@ class App extends React.Component {
       path: "/",
       element: (<>
         <MenuBar menuOptions={this.getMenu()} handleLogout={this.handleLogout} />
-        <SearchBar />
+
         <Outlet />
       </>
 

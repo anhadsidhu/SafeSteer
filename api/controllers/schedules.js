@@ -1,5 +1,5 @@
 
-// const Student = require('../models/student');
+const Student = require('../models/student');
 
 
 // function newschedule(req, res) {

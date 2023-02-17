@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './LoginPage.css';
-import userService from '../../../utils/userService'
+import userService from '../../../utils/userService';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+
+
 
 class LoginPage extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       email: '',
@@ -17,7 +21,7 @@ class LoginPage extends Component {
   handleChange = (e) => {
     // TODO: implement in an elegant way
     //console.log(e.target.name)
-    this.setState({[e.target.name]: e.target.value})
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   handleSubmit = async (e) => {
@@ -39,28 +43,58 @@ class LoginPage extends Component {
   render() {
     return (
       <div className="LoginPage">
-        <header className="header-footer">Log In</header>
-        <form className="form-horizontal" onSubmit={this.handleSubmit} >
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
-            </div>
+        <header className="header-footer-login">Log In</header>
+
+        <Box
+          component="form"
+          sx={{
+            '& .MuiTextField-root': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+          onSubmit={this.handleSubmit}
+        >
+          <div>
+            <TextField
+              error
+              type="email"
+              className="form-control"
+              placeholder="Email"
+              value={this.state.email}
+              name="email"
+              onChange={this.handleChange}
+              defaultValue="Email"
+              helperText=""
+
+
+            />
+
+
+            <TextField
+              error
+              type="password"
+              className="form-control"
+              placeholder="Password"
+              value={this.state.pw}
+              name="pw"
+              onChange={this.handleChange}
+              defaultValue="password"
+              helperText=""
+            />
+
+
           </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="password" className="form-control" placeholder="Password" value={this.state.pw} name="pw" onChange={this.handleChange} />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12 text-center">
-              <button className="btn btn-default">Log In</button>&nbsp;&nbsp;&nbsp;
-              <Link to='/'>Cancel</Link>
-            </div>
-          </div>
-        </form>
+          <br />
+          <button className="btn-login">Log In</button>&nbsp;&nbsp;&nbsp;
+          <Link to='/'>Cancel</Link>
+        </Box>
+
+
+
       </div>
     );
   }
 }
 
 export default LoginPage;
+

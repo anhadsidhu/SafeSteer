@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link, redirect } from 'react-router-dom';
 import userService from '../../../utils/userService';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 class SignupForm extends Component {
 
@@ -40,38 +42,86 @@ class SignupForm extends Component {
   render() {
     return (
       <div>
-        <header className="header-footer">Sign Up</header>
-        <form className="form-horizontal" onSubmit={this.handleSubmit} >
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="text" className="form-control" placeholder="Name" value={this.state.name} name="name" onChange={this.handleChange} />
-            </div>
+        <header className="header-footer">Sign Up </header>
+        <Box
+          component="form"
+          sx={{
+            '& .MuiTextField-root': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+          onSubmit={this.handleSubmit}
+        >
+          <div>
+          <TextField
+              error
+              type="name"
+               className="form-control"
+                placeholder="Name"
+                value={this.state.name}
+                name="name"
+              onChange={this.handleChange}
+              defaultValue="Name"
+              helperText=""
+            />
+
+
+            <TextField
+              error
+              type="email"
+              className="form-control"
+              placeholder="Email"
+              value={this.state.email}
+              name="email"
+              onChange={this.handleChange}
+              defaultValue="Email"
+              helperText=""
+
+
+            />
+
+
+            <TextField
+              error
+              type="password"
+              className="form-control"
+              placeholder="Password"
+              value={this.state.password}
+               name="password"
+              onChange={this.handleChange}
+              defaultValue="password"
+              helperText=""
+            />
+            <TextField
+              error
+              type="password"
+               className="form-control"
+                placeholder="Confirm Password"
+                value={this.state.passwordConf}
+                name="passwordConf"
+              onChange={this.handleChange}
+              defaultValue="Password Re-Confirm"
+              helperText=""
+
+
+            />
+
+
+
+
+
           </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="password" className="form-control" placeholder="Password" value={this.state.password} name="password" onChange={this.handleChange} />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="password" className="form-control" placeholder="Confirm Password" value={this.state.passwordConf} name="passwordConf" onChange={this.handleChange} />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12 text-center">
-              <button className="btn btn-default" disabled={this.isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
-              <Link to='/'>Cancel</Link>
-            </div>
-          </div>
-        </form>
+          <br />
+          <button className="btn-signup">Sign Up</button>&nbsp;&nbsp;&nbsp;
+          <Link to='/'>Cancel</Link>
+
+        </Box>
+
       </div>
     );
   }
 }
 
 export default SignupForm;
+
+

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Link, redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import studentService from '../../../utils/studentService';
 import './CreateStudentForm.css';
-import userService from '../../../utils/userService';
+
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 class CreateForm extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.state = {
@@ -39,13 +41,16 @@ class CreateForm extends Component {
         });
     }
 
+
+
     handleSubmit = async (e) => {
         e.preventDefault();
         try {
 
 
             const data = await studentService.create(this.state);
-             this.props.updateStudentState(data)
+            this.props.updateStudentState(data)
+            this.setState({ redirect: true });
         } catch (err) {
             this.props.updateMessage(err.message);
         }
@@ -57,87 +62,152 @@ class CreateForm extends Component {
     }
 
     render() {
+        if (this.state.redirect) {
+            return <Navigate to="/students" />;
+        }
         return (
             <div>
-                <header className="header-footer">Add Student</header>
-                <br />
-                <form className="form-horizontal" onSubmit={this.handleSubmit} >
-                    <div className="form-group">
-                        <div className="col-sm-12">
-                        <label>First Name :</label>
-                            <input type="text" className="form-control" placeholder="First Name" value={this.state.firstName} name="firstName" onChange={this.handleChange} />
-                        </div>
+                <header className="header-footer">Enter Student Information</header>
+
+                <hr />
+                <Box display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    component="form"
+
+                    sx={{
+                        '& .MuiTextField-root': { m: 1, py: 5, pl: 10, width: '25ch' },
+                    }}
+                    noValidate
+                    autoComplete="off"
+                    onSubmit={this.handleSubmit}
+                >
+                    <div>
+
+                        <TextField
+
+                            type="text"
+                            className="form-control"
+                            placeholder="First Name"
+                            value={this.state.firstName}
+                            name="firstName"
+                            onChange={this.handleChange}
+                            label="First Name"
+
+                        />
+
+                        <TextField
+                            type="text"
+                            className="form-control"
+                            placeholder="Last Name"
+                            value={this.state.lastName}
+                            name="lastName"
+                            onChange={this.handleChange}
+                            label="Last Name"
+                        />
+
+                        <TextField
+                            type="text"
+                            className="form-control"
+                            placeholder="Address"
+                            value={this.state.address}
+                            name="address"
+                            onChange={this.handleChange}
+                            label="Address"
+                        />
+
+                        <TextField
+                            type="date"
+                            className="form-control"
+                            placeholder="Date"
+                            value={this.state.date}
+                            name="date"
+                            onChange={this.handleChange}
+                            label="Date"
+                        />
+
+                        <TextField
+                            type="text"
+                            className="form-control"
+                            placeholder="Cellphone"
+                            value={this.state.cellphone}
+                            name="cellphone"
+                            onChange={this.handleChange}
+                            label="Cellphone"
+                        />
+
+                        <TextField
+                            type="text"
+                            className="form-control"
+                            placeholder="Drivers License"
+                            value={this.state.driversLicense}
+                            name="driversLicense"
+                            onChange={this.handleChange}
+                            label="Drivers License"
+                        />
+
+                        <TextField
+                            type="text"
+                            className="form-control"
+                            placeholder="Class"
+                            value={this.state.class}
+                            name="class"
+                            onChange={this.handleChange}
+                            label="Class"
+                        />
+
+                        <TextField
+                            type="date"
+                            className="form-control"
+                            placeholder="Expires"
+                            value={this.state.expires}
+                            name="expires"
+                            onChange={this.handleChange}
+                            label="Expires"
+                        />
+
+                        <TextField
+                            type="text"
+                            className="form-control"
+                            placeholder="Email"
+                            value={this.state.email}
+                            name="email"
+                            onChange={this.handleChange}
+                            label="Email"
+                        />
+
+                        <TextField
+                            type="date"
+                            className="form-control"
+                            placeholder="Date of Birth"
+                            value={this.state.dateOfBirth}
+                            name="dateOfBirth"
+                            onChange={this.handleChange}
+                            label="Date of Birth"
+                        />
+
+                        <TextField
+                            type="text"
+                            className="form-control"
+                            placeholder="Restrictions"
+                            value={this.state.restrictions}
+                            name="restrictions"
+                            onChange={this.handleChange}
+                            label="Restrictions"
+                        />
+
+                        <button className="btn-create" disabled={this.isFormInvalid()}>Submit</button>&nbsp;&nbsp;
+                        {/* <Link to='/'>Cancel</Link> */}
                     </div>
-                    <div className="form-group">
-                        <div className="col-sm-12">
-                        <label>Last Name :</label>
-                            <input type="text" className="form-control" placeholder="Last Name" value={this.state.lastName} name="lastName" onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-sm-12">
-                        <label>Address :</label>
-                            <input type="text" className="form-control" placeholder="Address" value={this.state.address} name="address" onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-sm-12">
-                        <label>Date :</label>
-                            <input type="date" className="form-control" placeholder="Date" value={this.state.date} name="date" onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-sm-12">
-                        <label>Cellphone :</label>
-                            <input type="text" className="form-control" placeholder="Cellphone" value={this.state.cellphone} name="cellphone" onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-sm-12">
-                        <label>Drivers License :</label>
-                            <input type="text" className="form-control" placeholder="Drivers License" value={this.state.driversLicense} name="driversLicense" onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-sm-12">
-                        <label>Class :</label>
-                            <input type="text" className="form-control" placeholder="Class" value={this.state.class} name="class" onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-sm-12">
-                        <label>Expires :</label>
-                            <input type="date" className="form-control" placeholder="Expires" value={this.state.expires} name="expires" onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-sm-12">
-                        <label>Email : </label>
-                            <input type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-sm-12">
-                        <label>Date of Birth :</label>
-                            <input type="date" className="form-control" placeholder="Date of Birth" value={this.state.dateOfBirth} name="dateOfBirth" onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-sm-12">
-                        <label>Restrictions :</label>
-                            <input type="text" className="form-control" placeholder="Restrictions" value={this.state.restrictions} name="restrictions" onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-sm-12 text-center">
-                            <button className="btn btn-default" disabled={this.isFormInvalid()}>Submit</button>&nbsp;&nbsp;
-                            <Link to='/'>Cancel</Link>
-                        </div>
-                    </div>
-                </form>
+                </Box>
+
+
+
+
             </div>
         );
     }
 }
 
 export default CreateForm;
+

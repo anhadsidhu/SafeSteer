@@ -1,28 +1,9 @@
-h3 {
-    padding-left: 50px;
-}
-
-.css-11a3cvg-MuiTableRow-root:last-child td {
-    padding-right: 20px;
-}
-
-.css-8je8zh-MuiTouchRipple-root {
-    margin-left: 20px;
-}
 
 
 
-.button-container-details{
-    display: flex;
-}
-
-
-
-
-
-/* CSS */
-.btn-update-student {
-    margin-left: 1200px;
+.btn-update-submit {
+    margin-top: 50px;
+    margin-left: 90px;
   backface-visibility: hidden;
   background: #14bc08;
   border: 0;
@@ -47,24 +28,24 @@ h3 {
   touch-action: manipulation;
 }
 
-.btn-update-student:disabled {
-  color: #787878;
+.btn-update-submit {
+    color: #fff;
   cursor: auto;
 }
 
-.btn-update-student:not(:disabled):hover {
+.btn-update-submit:not(:disabled):hover {
   transform: scale(1.05);
 }
 
-.btn-update-student:not(:disabled):hover:active {
+.btn-update-submit:not(:disabled):hover:active {
   transform: scale(1.05) translateY(.125rem);
 }
 
-.btn-update-student:focus {
+.btn-update-submit:focus {
   outline: 0 solid transparent;
 }
 
-.btn-update-student:focus:before {
+.btn-update-submit:focus:before {
   border-width: .125rem;
   content: "";
   left: calc(-1*.375rem);
@@ -75,11 +56,11 @@ h3 {
   user-select: none;
 }
 
-.btn-update-student:focus:not(:focus-visible) {
+.btn-update-submit:focus:not(:focus-visible) {
   outline: 0 solid transparent;
 }
 
-.btn-update-student:not(:disabled):active {
+.btn-update-submit:not(:disabled):active {
   transform: translateY(.125rem);
 }
 
@@ -88,8 +69,9 @@ h3 {
 
 
 
-.btn-delete-student {
+.btn-update-cancel {
     /* margin-left: 1300px; */
+    margin-bottom: 4px;
     background: #FF4742;
     border: 1px solid #FF4742;
     border-radius: 6px;
@@ -104,7 +86,7 @@ h3 {
     line-height: 16px;
     min-height: 40px;
     outline: 0;
-    padding: 12px 14px;
+    padding: 18.5px 14px;
     text-align: center;
     text-rendering: geometricprecision;
     text-transform: none;
@@ -114,13 +96,21 @@ h3 {
     vertical-align: middle;
 }
 
-.btn-delete-student:hover,
-.btn-delete-student:active {
+
+.btn-update-cancel:hover,
+.btn-update-cancel:active {
     background-color: initial;
     background-position: 0 0;
     color: #FF4742;
 }
 
-.btn-delete-student:active {
+.btn-update-cancel:active {
     opacity: .5;
+}
+
+
+
+.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root{
+    margin-left: 82px;
+    margin-top: 40px;
 }
